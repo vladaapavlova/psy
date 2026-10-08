@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Влада — психолог для тех, кто привык справляться сам</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF8F3; --ink:#15191D; --soft:#5C6570; --line:rgba(163,157,150,.45);
+    --hand:#6E2F3A; --hl:#E8B4BC; --ok:#2E5E4E; --no:#6E2F3A;
+    --card:#FFFFFF; --on-dark:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:17px}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px 140px}
+  .hand{font-family:'Caveat',cursive;color:var(--hand);font-size:22px;line-height:1.15}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(251,248,243,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav .inner{max-width:680px;margin:0 auto;display:flex;gap:22px;overflow-x:auto;padding:14px 20px;white-space:nowrap;scrollbar-width:none}
+  nav .inner::-webkit-scrollbar{display:none}
+  nav a{color:var(--soft);text-decoration:none;font-size:14px;font-weight:700}
+  nav a:hover{color:var(--ink)}
+
+  header{padding:56px 0 0}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);font-weight:700}
+  h1{font-size:clamp(36px,9vw,58px);font-weight:800;letter-spacing:-0.03em;line-height:1.12;margin:16px 0 10px}
+  h1 s{text-decoration-thickness:3px;text-decoration-color:var(--no)}
+  h1 .hand-word{font-family:'Caveat',cursive;color:var(--hand);font-weight:600;font-size:1.18em;line-height:1;letter-spacing:0}
+  .subhead{font-size:clamp(19px,4.4vw,24px);font-weight:500;color:var(--soft)}
+  .subhead mark{background:linear-gradient(transparent 55%, var(--hl) 55%);padding:0 2px;color:var(--ink)}
+  .who{color:var(--soft);margin-top:14px;font-size:16px}
+  .who b{color:var(--ink)}
+  .to-price{display:inline-block;margin-top:26px;background:var(--no);color:var(--on-dark);text-decoration:none;padding:16px 28px;border-radius:14px;font-weight:700;font-size:16px}
+  .to-price span{opacity:.65;font-weight:500}
+
+  section{margin-top:88px;scroll-margin-top:70px}
+  h2{font-size:clamp(23px,5.4vw,30px);font-weight:800;letter-spacing:-0.02em;margin:8px 0 22px}
+
+  .about p{margin-bottom:12px}
+  .about .hl{background:linear-gradient(transparent 60%, var(--hl) 60%);padding:0 2px}
+
+  /* рукописная пометка с закрученной стрелкой */
+  .curl-note{display:flex;align-items:flex-start;gap:6px;margin:-6px 0 6px 2px}
+  .curl-note .hand{font-size:23px}
+  .curl{flex:none;color:var(--hand)}
+  .curl-note.to-right{justify-content:flex-end;margin-right:8px}
+  .curl-note.to-right .curl{transform:scaleX(-1)}
+
+  /* точка А → точка Б */
+  .ab{display:grid;grid-template-columns:1fr 48px 1fr;gap:14px;align-items:stretch}
+  .col-lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:10px}
+  .a-col{display:flex;flex-direction:column;gap:10px}
+  .field{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:13px 15px;font-size:16.5px;font-weight:500}
+  .b-col{display:flex;flex-direction:column}
+  .b-free{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;font-size:17.5px;font-weight:500}
+  .b-free .hand{font-size:21px}
+  .arrow{display:flex;align-items:center;justify-content:center;color:var(--hand);font-size:32px;font-weight:800}
+  @media (max-width:560px){
+    .ab{grid-template-columns:1fr}
+    .arrow{transform:rotate(90deg);padding:2px 0}
+    .b-free{padding:4px 2px 0}
+  }
+  .story{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .story .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:8px}
+  .story p{font-size:17.5px;font-weight:500}
+  .story .ps{margin-top:10px;color:var(--soft);font-size:15.5px;font-weight:400}
+
+  .sell{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:560px){.sell{grid-template-columns:1fr}}
+  .sell .col h3{font-size:15px;font-weight:800;margin-bottom:14px}
+  .sell .col.nope h3{color:var(--no)} .sell .col.yep h3{color:var(--ok)}
+  .sell ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .sell li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:16px;align-items:baseline}
+  .sell li b{font-weight:800}
+  .sell .nope li b{color:var(--no)} .sell .yep li b{color:var(--ok)}
+  .sell li span{color:var(--soft)}
+
+  .steps{border-left:2px solid var(--line);padding-left:22px;display:flex;flex-direction:column;gap:24px}
+  .step{position:relative}
+  .step::before{content:'';position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--hand)}
+  .step h3{font-weight:700}
+  .step p{color:var(--soft);font-size:16px;margin-top:2px}
+
+  .plan{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:30px 22px 26px;position:relative;margin-top:30px}
+  .plan .hand-tag{position:absolute;top:-15px;right:20px;transform:rotate(2deg);background:var(--bg);padding:0 10px;line-height:1;font-size:24px}
+  .plan .name{font-weight:800;font-size:20px}
+  .plan .price{font-size:clamp(38px,9vw,50px);font-weight:800;letter-spacing:-0.03em;margin:6px 0 0}
+  .plan .per{color:var(--soft);font-size:15px;margin-bottom:16px}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .plan li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:16px}
+  .plan li b{color:var(--hand);font-weight:800}
+
+  .contract-box{background:var(--card);border:1px solid var(--line);border-radius:14px}
+  .contract-box summary{padding:18px 20px;cursor:pointer;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+  .contract-box summary::after{content:'+';color:var(--hand);font-size:24px;font-weight:800}
+  .contract-box[open] summary::after{content:'–'}
+  .contract-intro{margin:0 0 18px;color:var(--ink);font-size:16px}
+  .edu a.diploma{padding:6px;background:var(--card);border-style:solid;overflow:hidden}
+  .edu a.diploma img{width:100%;height:100%;object-fit:contain;display:block}
+  .contract-inner{padding:0 20px 22px;font-size:16px;font-family:'Manrope',sans-serif}
+  .contract-inner h3{font-size:13px;font-weight:800;margin:24px 0 8px;letter-spacing:.14em;text-transform:uppercase;color:var(--hand);display:flex;align-items:center;gap:7px}
+  .doodle{width:20px;height:20px;flex:none;color:var(--hand);transform:rotate(-4deg)}
+  .heart-inline{width:1.15em;height:1.05em;vertical-align:-0.18em;color:var(--hand)}
+  .contract-inner p{margin-bottom:10px;color:var(--ink)}
+  .contract-inner .lead{color:var(--ink)}
+  .contract-inner a{color:var(--hand)}
+
+  .proof{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .stat .big{font-size:21px;font-weight:800}
+  .stat .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-top:4px}
+  .edu{margin-top:16px;background:var(--card);border:1px dashed var(--line);border-radius:12px}
+  .edu summary{padding:16px 18px;cursor:pointer;font-weight:700;list-style:none}
+  .edu .inner{padding:0 18px 18px;color:var(--soft);font-size:15px}
+  .edu .edu-list{list-style:none;display:flex;flex-direction:column;gap:8px;color:var(--ink);font-size:15.5px}
+  .edu .edu-name{font-size:21px}
+  .edu .diploma-row{display:flex;gap:10px;margin-top:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+  .edu .diploma{flex:0 0 46%;aspect-ratio:3/4;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:13px;text-align:center;padding:8px;scroll-snap-align:start;background:var(--bg)}
+  .edu .swipe-hint{margin-top:4px;text-align:right;font-size:20px}
+  .fine{margin-top:14px;font-size:13px;color:var(--soft)}
+
+  .cta{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 40%);z-index:15}
+  .cta a{display:block;max-width:640px;margin:0 auto;background:var(--no);color:var(--on-dark);text-decoration:none;text-align:center;padding:17px;border-radius:14px;font-weight:700}
+  .cta .fine-cta{text-align:center;margin-top:6px}
+  footer{margin-top:84px;color:var(--soft);font-size:14px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="#about">Обо мне</a>
+    <a href="#pointa">Запросы</a>
+    <a href="#how">Как устроено</a>
+    <a href="#price">Тариф</a>
+    <a href="#contract">Контракт</a>
+    <a href="#proof">Опора</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Продукт не гарантирует счастья — но помогает быть собой</div>
+    <h1>Ты <s>не проект</s>.<br>Ты — <span class="hand-word">человек</span>.</h1>
+    <p class="subhead">У жизни нет KPI, <mark>и это хорошая новость</mark>.</p>
+    <p class="who"><b>Влада, психолог для тех, кто привык справляться сам.</b><br>Гештальт-терапевт. Онлайн и очно (по договоренности)</p>
+    <a class="to-price" href="#price">Сразу к цене ↓</a>
+  </header>
+
+  <section id="about">
+    <div class="eyebrow">/ Обо мне</div>
+    <h2>Коротко и по делу</h2>
+    <div class="about">
+      <p>Я Влада. Работаю менеджером проектов в маркетинге — корпоративную жизнь знаю изнутри: дедлайны, KPI и «надо держаться» мне объяснять не нужно.</p>
+      <p><span class="hl">Терапия</span> — моя вторая профессия и способ жить. Я много чувствую, часто рефлексирую, и умею оставаться рядом, когда другому непросто.</p>
+    </div>
+  </section>
+
+  <section id="pointa">
+    <div class="eyebrow">/ Запросы</div>
+    <h2>С чем обычно приходят</h2>
+    <div class="curl-note">
+      <svg class="curl" width="52" height="60" viewBox="0 0 52 60" fill="none" aria-hidden="true">
+        <path d="M46 8 C 24 6, 10 18, 12 34 C 13 42, 15 48, 17 53" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M9 46 L18 55 L24 44" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="hand">С этих слов часто начинается терапия</span>
+    </div>
+    <div class="ab">
+      <div class="a-col">
+        <div class="col-lbl">Точка А</div>
+        <div class="field">«Я все делаю правильно, но радости нет»</div>
+        <div class="field">«Я не знаю, как жить дальше»</div>
+        <div class="field">«Меня все бесит, и я не понимаю почему»</div>
+        <div class="field">«Я должен справляться сам»</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="b-col">
+        <div class="col-lbl">Точка Б</div>
+        <div class="b-free">
+          <p>Заполним вместе — заранее ее не знает никто.</p>
+          <span class="hand">И это норм)</span>
+        </div>
+      </div>
+    </div>
+    <div class="story">
+      <div class="lbl">User story</div>
+      <p>«У меня все в порядке: есть хорошая работа, любящий муж, дом и машина. Почему внутри мне пусто и печально?»</p>
+      <p class="ps">Твоя история может звучать иначе — расскажешь при встрече.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">/ Продукт, которого нет</div>
+    <h2>Честный расклад</h2>
+    <div class="sell">
+      <div class="col nope">
+        <h3>Что я не продаю</h3>
+        <ul>
+          <li><b>✗</b><p>Новую жизнь за три встречи</p></li>
+          <li><b>✗</b><p>Техники и домашки ради домашек</p></li>
+          <li><b>✗</b><p>Советы, как тебе правильно жить</p></li>
+        </ul>
+      </div>
+      <div class="col yep">
+        <h3>Что делаю</h3>
+        <ul>
+          <li><b>✓</b><p>50 минут полного внимания</p></li>
+          <li><b>✓</b><p>Место, где можно злиться, горевать и молчать</p></li>
+          <li><b>✓</b><p>Твой темп — перемены, выросшие спокойно, остаются</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="eyebrow">/ Роадмап без дедлайнов</div>
+    <h2>Как работает терапия</h2>
+    <div class="steps">
+      <div class="step"><h3>Первая встреча — бриф</h3><p>Знакомимся, я слушаю твою историю, вместе формулируем запрос и проверяем «химию»: терапия работает, когда рядом подходящий человек.</p></div>
+      <div class="step"><h3>Регулярность</h3><p>50 минут, обычно раз в неделю. Терапия работает не отдельными инсайтами, а процессом.</p></div>
+      <div class="step"><h3>Что происходит на сессии</h3><p>Разговариваем, замечаем чувства и повторяющиеся сценарии. Иногда я предлагаю эксперимент или расстановочную работу — всегда объясняя, зачем.</p></div>
+      <div class="step"><h3>Где происходят перемены</h3><p>Между сессиями, в твоей жизни. Моя работа — чтобы им было откуда взяться.</p></div>
+    </div>
+  </section>
+
+  <section id="price">
+    <div class="eyebrow">/ Тарифы</div>
+    <h2>Тариф один</h2>
+    <div class="plan">
+      <span class="hand hand-tag">других не будет :)</span>
+      <div class="name">Человеческий</div>
+      <div class="price">3500 ₽</div>
+      <div class="per">За сессию · 50 минут</div>
+      <ul>
+        <li><b>+</b>Полное внимание — я беру немного клиентов</li>
+        <li><b>+</b>Можно прийти, не зная «с чего начать»</li>
+        <li><b>+</b>Конфиденциальность — все остается между нами</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contract">
+    <div class="eyebrow">/ Условия сотрудничества</div>
+    <h2>Терапевтический контракт</h2>
+    <p class="contract-intro">Читать заранее не обязательно: на первой встрече я сама расскажу, как мы работаем, и отвечу на вопросы. А здесь правила лежат целиком — чтобы к ним можно было вернуться в любой момент.</p>
+    <div class="curl-note to-right">
+      <span class="hand">Вернуться к правилам</span>
+      <svg class="curl" width="58" height="58" viewBox="0 0 58 58" fill="none" aria-hidden="true">
+        <path d="M8 4 C 2 22, 14 34, 32 40 C 38 42, 42 44, 45 47" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M37 40 L47 49 L34 52" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <details class="contract-box">
+      <summary>Все правила в одном месте</summary>
+      <div class="contract-inner">
+        <p class="lead">Мне важно, чтобы в терапии было безопасно и ясно. Поэтому здесь я собрала договоренности, на которых будет держаться наша работа.</p>
+
+        <h3>/ <svg class="doodle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="14" height="12" rx="2.5"/><path d="M3 9.2 C 8 8.6, 13 9.6, 17 9"/><path d="M7 3v3.5M13 3v3.5"/></svg> Формат встреч</h3>
+
+        <p>Сессия длится <b>50 минут</b> и начинается в заранее согласованное время.</p>
+
+        <p>Обычно мы встречаемся <b>раз в неделю</b>. Такой ритм помогает нам обоим замечать изменения и не терять нить между встречами. Если случился кризис и раз в неделю мало, можем договориться о более частых встречах.</p>
+
+        <p>Встречаемся <b>онлайн или очно</b>, по договоренности. Для онлайн-сессий прошу найти место, где тебя никто не будет отвлекать.</p>
+
+        <p>Я работаю только на трезвую голову — и свою, и твою. Если перед сессией был алкоголь или другие вещества, я попрошу перенести встречу: в таком состоянии работа вряд ли принесет пользу.</p>
+
+        <h3>/ <svg class="doodle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="15" height="10.5" rx="2.2"/><path d="M3 8.8 C 8 8.3, 13 9.2, 17 8.7"/><path d="M5.5 12.6h3.6"/></svg> Оплата и запись</h3>
+
+        <p>Стоимость сессии мы обсуждаем <b>до начала совместной работы</b>. Если цена меняется, я предупреждаю <b>минимум за месяц</b>. Никаких сюрпризов.</p>
+
+        <p>Чтобы закрепить время в расписании за тобой, я прошу внести <b>предоплату 50% за 24 часа</b> до встречи. Вторая половина оплачивается <b>после встречи</b>.</p>
+
+        <h3>/ <svg class="doodle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.6 7.4 A6 6 0 0 0 4.6 7.8"/><path d="M15.9 3.6 L15.7 7.5 L11.9 7"/><path d="M4.4 12.6 A6 6 0 0 0 15.4 12.2"/><path d="M4.1 16.4 L4.3 12.5 L8.1 13"/></svg> Перенос и отмена</h3>
+
+        <p>Перенести или отменить встречу можно <b>не позже чем за 24 часа</b>. Иначе предоплата остается у меня: это время было зарезервировано для тебя.</p>
+
+        <p>У тебя есть <b>одна бесплатная отмена по форс-мажору</b>.</p>
+
+        <p>Правило работает и в обратную сторону: если я пропускаю встречу или отменяю ее позже чем за сутки, <b>следующая встреча для тебя бесплатная</b>. Ведь ты тоже освобождаешь под нее время.</p>
+
+        <h3>/ <svg class="doodle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="10" height="8" rx="2"/><path d="M7 9 V7.2 a3 3 0 0 1 6 0 V9"/><path d="M10 12.2v1.8"/></svg> Конфиденциальность и границы</h3>
+
+        <p>Все, что ты рассказываешь на сессиях, остается <b>конфиденциальным</b>. Исключение — случаи, когда есть <b>угроза жизни или безопасности</b>, твоей или других людей.</p>
+
+        <p>Иногда я обсуждаю сложные моменты работы на <b>супервизии</b> с более опытным терапевтом. Это обычная практика в профессии. Я не называю имен и деталей, по которым тебя можно узнать.</p>
+
+        <p>Если мы случайно встретимся в городе, <b>я не поздороваюсь первой</b>, чтобы не раскрывать факт нашей работы. Если поздороваешься ты, я с радостью отвечу.</p>
+
+        <p>Предлагаю писать друг другу <b>только по делу</b>: время, перенос, оплата. Все остальное приноси на сессию. Мне правда интересно, что у тебя происходит, и на встрече у меня есть время и внимание, чтобы по-настоящему с этим работать. Эти 50 минут только твои.</p>
+
+        <h3>/ <svg class="doodle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="11.2" r="5.8"/><path d="M10 8.2 V11.4 L12.2 12.8"/><path d="M3.2 6.2 C 3.6 4.4, 5 3.4, 6.6 3.6"/><path d="M16.8 6.2 C 16.4 4.4, 15 3.4, 13.4 3.6"/><path d="M6.4 16.4 L5.2 18 M13.6 16.4 L14.8 18"/></svg> Правило 48 часов</h3>
+
+        <p>После сессии может накрыть: поднимаются чувства, приходят мысли, которых раньше не было. Это нормально.</p>
+
+        <p>Поэтому я предлагаю <b>в течение двух дней после встречи не принимать больших решений</b>: не жениться, не разводиться, не увольняться, не продавать квартиру. Если решение настоящее, через два дня оно никуда не денется <svg class="heart-inline" viewBox="0 0 42 38" fill="none" aria-label="сердце"><path d="M21 34.5 C 13 28, 3.5 21.5, 4.2 12.2 C 4.8 5.2, 12.6 2.6, 17.4 7.4 C 19 9, 19.8 10.6, 20.4 12 C 21.6 7.2, 26.2 3.4, 31.4 4.2 C 37.6 5.2, 39.4 12.4, 36.4 18.6 C 33.6 24.2, 27.6 29, 20.2 35.6" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/></svg></p>
+
+        <h3>/ <svg class="doodle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17.5 C 10 13.5, 9.6 11, 9.8 8.6"/><path d="M9.8 10.4 C 7.6 10.8, 4.6 9.8, 3.6 6.4 C 6.6 6, 9.2 7.4, 9.8 10.4"/><path d="M9.9 8.6 C 10.2 5.8, 12.6 3.4, 16.4 3.6 C 16.2 7, 13.6 9, 9.9 8.6"/></svg> Про совместимость</h3>
+
+        <p>Терапия — это в первую очередь отношения, и мы можем <b>не подойти друг другу</b>. Так бывает, это нормально.</p>
+
+        <p>Если тебе что-то не нравится — во мне, в формате, в том, что я сказала на прошлой встрече, — говори об этом прямо на сессии. Я не обижусь, и с таких разговоров часто начинается самое интересное.</p>
+
+        <p>Бывает, что желание все бросить появляется именно тогда, когда работа подобралась к чему-то важному. Поэтому прежде чем уйти, давай про это поговорим.</p>
+
+        <h3>/ <svg class="doodle" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5v13.5"/><path d="M6 4.2 h8.6 l-2.6 3.1 2.6 3.1 H6"/></svg> Завершение терапии</h3>
+
+        <p>Закончить терапию ты можешь <b>в любой момент</b>. Но раз это отношения, я попрошу <b>одну или несколько завершающих встреч</b>: посмотреть, что поменялось, попрощаться по-человечески и не исчезать посреди процесса.</p>
+
+        <p>Если что-то в этих правилах вызывает вопросы или сомнения, всегда можем обсудить это на встрече.</p>
+      </div>
+    </details>
+  </section>
+
+  <section id="proof">
+    <div class="eyebrow">/ Вместо отзывов</div>
+    <h2>На чем держится работа</h2>
+    <div class="proof">
+      <div class="stat"><div class="big">С 2022</div><div class="lbl">Практикую расстановки</div></div>
+      <div class="stat"><div class="big">3 года</div><div class="lbl">Обучение · МИГиП</div></div>
+      <div class="stat"><div class="big">100+ часов</div><div class="lbl">Личной терапии в гештальте</div></div>
+      <div class="stat"><div class="big">150+ часов</div><div class="lbl">Супервизии</div></div>
+    </div>
+    <details class="edu">
+      <summary>🎓 Образование и дипломы</summary>
+      <div class="inner">
+        <ul class="edu-list">
+          <li><span class="hand edu-name">Практическая социальная психология</span> — РГСУ, выпуск 2027</li>
+          <li><span class="hand edu-name">Гештальт-терапия</span> — МИГиП, выпуск 2028</li>
+          <li><span class="hand edu-name">Базовые и продвинутые навыки коуча</span> — «Школа коучинга», АНО ДПО «МИИР», 2021–2022</li>
+        </ul>
+        <div class="diploma-row">
+          <a class="diploma" href="img/rgsu-spravka.jpg" target="_blank" rel="noopener"><img src="img/rgsu-spravka.jpg" alt="Справка РГСУ: магистратура «Психология», 2 курс" loading="lazy"></a>
+          <a class="diploma" href="img/migip-1.jpg" target="_blank" rel="noopener"><img src="img/migip-1.jpg" alt="Сертификат МИГиП «Введение в гештальт-терапию», 150 часов" loading="lazy"></a>
+          <a class="diploma" href="img/coach-basic.jpg" target="_blank" rel="noopener"><img src="img/coach-basic.jpg" alt="Сертификат «Базовые навыки коуча», 28 часов" loading="lazy"></a>
+          <a class="diploma" href="img/coach-advanced.jpg" target="_blank" rel="noopener"><img src="img/coach-advanced.jpg" alt="Сертификат «Продвинутые навыки коуча», 27 часов" loading="lazy"></a>
+        </div>
+        <p class="swipe-hint hand">листай →</p>
+      </div>
+    </details>
+    <p class="fine">Отзывы клиентов не публикую из этических соображений — для меня конфиденциальность важнее социальных доказательств.</p>
+  </section>
+
+  <footer>Влада · психолог для тех, кто привык справляться сам · блог <a href="https://t.me/not_a_project_psy" target="_blank" rel="noopener" style="color:var(--hand)">«Ты не проект»</a></footer>
+</div>
+
+<div class="cta">
+  <a href="https://t.me/vlada_a_pavlova">Просто написать</a>
+  <div class="fine-cta hand">Не «оставить заявку». Просто напиши как человеку</div>
+</div>
+</body>
+</html>
